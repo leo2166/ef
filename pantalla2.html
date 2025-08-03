@@ -2,16 +2,45 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Composición de Correo</title>
+  <title>Composición de Correo - Envío Fácil</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Composición y envío de correos electrónicos - Envío Fácil">
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Envío Fácil">
+  
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="pantalla2.css">
+  
+  <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="pantalla2.js" defer></script>
 </head>
 <body>
   <div class="pantalla">
-    <h2>Composición y envío de correo</h2>
+    <div class="header-section">
+      <h2>Composición y envío de correo</h2>
+      <p class="subtitle">Complete los campos necesarios para enviar su correo</p>
+      
+      <!-- Toggle de modo oscuro -->
+      <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo oscuro">
+          <span class="theme-icon">🌙</span>
+          <span class="theme-text">Modo Oscuro</span>
+        </button>
+      </div>
+    </div>
 
     <!-- Pestañas de Navegación -->
     <div class="tab-nav">
@@ -104,7 +133,7 @@
         <div class="field-group">
           <label for="correoOtro">Dirección de correo:</label>
           <input type="email" id="correoOtro" placeholder="ejemplo@dominio.com">
-          <p id="validacionCorreoOtro" class="hidden" style="color: red;">Correo no válido</p>
+          <p id="validacionCorreoOtro" class="hidden validation-error">Correo no válido</p>
         </div>
         <div class="field-group">
           <label for="asuntoOtro">Asunto del correo:</label>
@@ -118,41 +147,71 @@
     </div>
 
     <!-- Campos Comunes (fuera de las pestañas) -->
-    <div class="field-group">
-      <input type="checkbox" id="activarCC">
-      <label for="activarCC">Añadir CC (opcional)</label>
-      <div id="ccField" class="hidden">
-        <input type="email" id="cc" placeholder="Correo en copia">
+    <div class="common-fields">
+      <div class="field-group checkbox-group">
+        <input type="checkbox" id="activarCC">
+        <label for="activarCC">Añadir CC (opcional)</label>
+        <div id="ccField" class="hidden">
+          <input type="email" id="cc" placeholder="Correo en copia">
+        </div>
       </div>
-    </div>
 
-    <!-- Adjuntos -->
-    <div class="field-group">
-      <label for="imagenes">Selecciona imágenes JPG a adjuntar:</label>
-      <input type="file" id="imagenes" multiple accept="image/jpeg,image/jpg">
-      <div id="resultadoPDF"></div>
-      <button id="btnGenerarPDF">Generar PDF</button>
-      <p id="estadoPDF" style="color: green;"></p>
-      <a href="#" id="enlaceVerPDF" class="hidden" target="_blank">Ver PDF generado</a>
+      <!-- Adjuntos -->
+      <div class="field-group attachment-section">
+        <label for="imagenes">Selecciona imágenes JPG a adjuntar:</label>
+        <input type="file" id="imagenes" multiple accept="image/jpeg,image/jpg">
+        <div id="resultadoPDF"></div>
+        <button id="btnGenerarPDF" class="btn-secondary">Generar PDF</button>
+        <p id="estadoPDF" class="status-message"></p>
+        <a href="#" id="enlaceVerPDF" class="hidden pdf-link" target="_blank">Ver PDF generado</a>
+      </div>
     </div>
 
     <!-- Previsualización -->
     <div id="modalPrevisualizacion" class="hidden">
       <div class="modal-content">
         <h3>Previsualización del Correo</h3>
-        <p><strong>Para:</strong> <span id="previewPara"></span></p>
-        <p><strong>CC:</strong> <span id="previewCC"></span></p>
-        <p><strong>Asunto:</strong> <span id="previewAsunto"></span></p>
-        <p><strong>Adjunto:</strong> <span id="previewAdjunto"></span></p>
-        <p><strong>Cuerpo:</strong></p>
-        <div class="cuerpo-modal"><span id="previewCuerpo"></span></div>
-        <button id="btnCerrarModal">Cerrar</button>
+        <div class="preview-details">
+          <p><strong>Para:</strong> <span id="previewPara"></span></p>
+          <p><strong>CC:</strong> <span id="previewCC"></span></p>
+          <p><strong>Asunto:</strong> <span id="previewAsunto"></span></p>
+          <p><strong>Adjunto:</strong> <span id="previewAdjunto"></span></p>
+          <p><strong>Cuerpo:</strong></p>
+          <div class="cuerpo-modal"><span id="previewCuerpo"></span></div>
+        </div>
+        <button id="btnCerrarModal" class="btn-secondary">Cerrar</button>
       </div>
     </div>
 
-    <button id="btnPrevisualizar">Previsualizar Correo</button>
-    <button id="btnEnviar" disabled>Enviar</button>
+    <div class="action-buttons">
+      <button id="btnPrevisualizar" class="btn-primary">Previsualizar Correo</button>
+      <button id="btnEnviar" class="btn-success" disabled>Enviar</button>
+    </div>
     <div id="mensaje"></div>
   </div>
+  
+  <!-- PWA Scripts -->
+  <script src="pantalla2.js" defer></script>
+  <script src="theme-toggle.js"></script>
+  <script src="pwa-install.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    // Manejar parámetros URL para shortcuts
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    
+    if (tabParam && ['reembolso', 'aval', 'cita', 'otro'].includes(tabParam)) {
+      // Esperar a que el DOM esté listo y luego cambiar la pestaña
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          const tabButton = document.querySelector(`[data-tab="${tabParam}"]`);
+          if (tabButton) {
+            tabButton.click();
+          }
+        }, 100);
+      });
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+envio-facil/
+├── index.html             <-- Contenedor principal
+├── css/
+│   └── enviofacil-style.css  <-- Estilos globales
+├── sections/
+│   ├── gmail-auth.html        <-- Sección 1: Autorización Gmail
+│   ├── remitente-form.html    <-- Sección 2: Formulario Remitente
+│   ├── destinatario-form.html <-- Sección 3: Formulario Destinatario
+│   ├── mensaje-documentos.html <-- Sección 4 y 5
+│   └── boton-envio.html       <-- Sección final (botón de envío)
+└── js/
+    └── script.js           <-- (opcional) lógica para eventos

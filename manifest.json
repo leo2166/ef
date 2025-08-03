@@ -1,0 +1,41 @@
+{
+  "name": "Envío Fácil - Gestión de Correos",
+  "short_name": "Envío Fácil",
+  "description": "Aplicación para envío de correos electrónicos y conversión de documentos, diseñada especialmente para usuarios mayores",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#667eea",
+  "theme_color": "#667eea",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["productivity", "utilities", "communication"],
+  "icons": [
+    {
+      "src": "images/ef.png",
+      "sizes": "100x100",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/mobile-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/mobile-2.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/desktop-1.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

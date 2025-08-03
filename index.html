@@ -4,14 +4,34 @@
   <meta charset="UTF-8">
   <title>Envío Fácil</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- PWA Meta Tags -->
+  <meta name="description" content="Aplicación para envío de correos electrónicos y conversión de documentos, diseñada especialmente para usuarios mayores">
+  <meta name="theme-color" content="#667eea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Envío Fácil">
+  <meta name="msapplication-TileColor" content="#667eea">
+  <meta name="msapplication-config" content="/browserconfig.xml">
+  
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#667eea">
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- Scripts -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="app.js" defer></script>
 </head>
 <body>
-  <!-- Etiqueta de autenticación eliminada de la parte superior -->
-  <!-- <p id="estado-autenticacion"></p> -->
   <p id="token-mostrado"></p>
 
   <div id="pantalla-bienvenida" class="pantalla">
@@ -35,17 +55,6 @@
          data-auto_prompt="false">
     </div>
 
-    <!-- clase btn-autorizar comentada para eliminar fondo azul superpuesto -->
-    <!-- <div class="g_id_signin btn-autorizar"
-         data-type="standard"
-         data-size="large"
-         data-theme="filled_blue"
-         data-text="authorize"
-         data-shape="pill"
-         data-logo_alignment="left">
-    </div> -->
-
-    <!-- versión limpia sin clase btn-autorizar -->
     <div class="g_id_signin"
          data-type="standard"
          data-size="large"
@@ -59,13 +68,16 @@
 
     <p class="nota">Al hacer clic en "Acceder con Google", se conectará con tu cuenta de Gmail para permitir el envío de correos.</p>
     
-    <!-- ✅ Etiqueta de autenticado ahora aparece aquí -->
     <div id="estado-autenticacion" style="margin-top: 16px; font-weight: bold;"></div>
 
-    <!-- 🔧 Línea comentada: mensaje redundante "Autenticado" -->
-    <!-- <div id="status">No autenticado</div> -->
+    <!-- Toggle de modo oscuro -->
+    <div class="theme-toggle-container">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar a modo oscuro">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-text">Modo Oscuro</span>
+      </button>
+    </div>
 
-    <!-- Botón para pasar a la pantalla de envío (inicialmente deshabilitado) -->
     <button id="btn-continuar" class="btn-continuar">Continuar</button>
   </div>
 
@@ -87,6 +99,30 @@
     </form>
     <div id="resultado"></div>
   </div>
+  
+  <!-- PWA Scripts -->
   <script src="app.js"></script>
+  <script src="theme-toggle.js"></script>
+  <script src="pwa-install.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((registration) => {
+            console.log('✅ Service Worker registrado exitosamente:', registration.scope);
+            
+            // Verificar actualizaciones cada 60 segundos
+            setInterval(() => {
+              registration.update();
+            }, 60000);
+          })
+          .catch((error) => {
+            console.error('❌ Error al registrar Service Worker:', error);
+          });
+      });
+    }
+  </script>
 </body>
 </html>

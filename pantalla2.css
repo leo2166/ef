@@ -1,47 +1,122 @@
-body {
-  background-color: #f4f4f4;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+/* Fuentes optimizadas para legibilidad móvil */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Estilos para las pestañas */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  margin: 0;
+  padding: 12px;
+  color: #2d3748;
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Contenedor principal optimizado para móvil */
+.pantalla {
+  background: #ffffff;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 24px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pantalla::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+/* Header optimizado */
+.header-section {
+  text-align: center;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.header-section h2 {
+  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.subtitle {
+  color: #4a5568;
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Pestañas optimizadas para móvil */
 .tab-nav {
-  display: flex;
-  border-bottom: 2px solid #ccc;
-  margin-bottom: 20px;
-  overflow-x: auto; /* Permite scroll horizontal si hay muchas pestañas */
-  white-space: nowrap; /* Evita que las pestañas se envuelvan */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 8px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 .tab-link {
-  background: none;
+  background: transparent;
   border: none;
-  padding: 10px 20px;
+  padding: 14px 12px;
   cursor: pointer;
-  font-size: 16px;
-  margin-right: 5px;
-  border-bottom: 2px solid transparent;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 12px;
   transition: all 0.3s ease;
-  flex-shrink: 0; /* Evita que las pestañas se encojan */
+  color: #4a5568;
+  text-align: center;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  line-height: 1.2;
 }
 
-.tab-link:hover {
-  background-color: #e9ecef;
+.tab-link:active {
+  background: #edf2f7;
+  color: #2d3748;
+  transform: translateY(1px);
 }
 
 .tab-link.active {
-  border-bottom-color: #007bff;
-  font-weight: bold;
-  color: #007bff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
+/* Contenedor de pestañas */
 .tab-content-wrapper {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+  background: #ffffff;
+  border-radius: 16px;
   padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .tab-content {
@@ -52,120 +127,372 @@ body {
   display: block;
 }
 
-/* Estilos generales de la pantalla */
-.pantalla {
-  background: #fff;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
-  border-radius: 10px;
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 30px;
-}
-
+/* Grupos de campos optimizados */
 .field-group {
   margin-bottom: 20px;
 }
 
 .field-group label {
   display: block;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 8px;
-  color: #333;
+  color: #2d3748;
+  font-size: 1rem;
 }
 
+/* Inputs optimizados para móvil */
 input[type="text"],
 input[type="email"],
 textarea,
 select {
   width: 100%;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box; /* Asegura que el padding no aumente el ancho */
-  font-size: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  box-sizing: border-box;
+  font-size: 16px; /* Evita zoom en iOS */
   margin-top: 4px;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #2d3748;
+  font-family: inherit;
+  min-height: 52px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus,
 select:focus {
-  border-color: #007bff;
+  border-color: #667eea;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-/* Estilos para el formulario médico */
+/* Textarea específico */
+textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+/* Select optimizado para móvil */
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+/* Formulario médico optimizado */
 .form-medico {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 20px;
-  background-color: #f9f9f9;
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+  border: 1px solid #e2e8f0;
 }
 
 .form-medico label {
-  font-weight: normal;
-  margin-top: 10px;
-  margin-bottom: 2px;
-  color: #555;
+  font-weight: 500;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  color: #4a5568;
+  font-size: 0.95rem;
+}
+
+.form-medico label:first-child {
+  margin-top: 0;
 }
 
 .form-medico input[type="text"],
-.form-medico textarea {
-  background-color: #fff;
+.form-medico textarea,
+.form-medico select {
+  background: #ffffff;
+  font-size: 16px;
+  padding: 14px;
+  min-height: 48px;
 }
 
-/* Botones generales */
-.btn-yellow {
-  background-color: #FFD700;
-  color: #000;
-  padding: 10px 15px;
-  border: none;
-  margin-right: 10px;
-  border-radius: 6px;
+/* Checkbox optimizado para táctil */
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  margin: 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  accent-color: #667eea;
+  transform: scale(1.2);
 }
 
-.btn-yellow:hover {
-  background-color: #e6c200;
+.checkbox-group label {
+  margin: 0;
+  cursor: pointer;
+  font-size: 1rem;
+  flex: 1;
 }
 
-#btnPrevisualizar,
-#btnEnviar {
-  display: inline-block;
-  margin-right: 10px;
-  padding: 12px 25px;
-  border-radius: 6px;
+/* Campos comunes */
+.common-fields {
+  background: #f7fafc;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Sección de adjuntos optimizada */
+.attachment-section {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px dashed #cbd5e0;
+  margin-top: 16px;
+}
+
+.attachment-section label {
+  color: #4a5568;
+  text-align: center;
+  display: block;
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+input[type="file"] {
   border: none;
+  background: #edf2f7;
+  padding: 16px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
+  min-height: 52px;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
-#btnPrevisualizar {
-  background-color: #0066cc;
-  color: #fff;
+input[type="file"]:active {
+  background: #e2e8f0;
 }
 
-#btnPrevisualizar:hover {
-  background-color: #0056b3;
+/* Botones optimizados para táctil */
+.btn-primary,
+.btn-secondary,
+.btn-success {
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.025em;
+  font-family: inherit;
+  min-height: 52px;
+  touch-action: manipulation;
 }
 
-#btnEnviar {
-  background-color: #28a745;
-  color: #fff;
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
-#btnEnviar:hover {
-  background-color: #218838;
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
-#btnEnviar:disabled {
-  background-color: #cccccc;
+.btn-secondary {
+  background: #e2e8f0;
+  color: #4a5568;
+  border: 1px solid #cbd5e0;
+}
+
+.btn-secondary:active {
+  background: #cbd5e0;
+  transform: translateY(1px);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
+}
+
+.btn-success:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 12px rgba(72, 187, 120, 0.4);
+}
+
+.btn-success:disabled {
+  background: #cbd5e0;
+  color: #718096;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botones de acción optimizados */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Modal optimizado para móvil */
+#modalPrevisualizacion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  padding: 20px 12px;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background: #ffffff;
+  padding: 24px 20px;
+  border-radius: 20px;
+  max-width: 100%;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  margin-top: 20px;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #2d3748;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.preview-details p {
+  margin-bottom: 12px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.preview-details strong {
+  color: #4a5568;
+  font-weight: 600;
+}
+
+.cuerpo-modal {
+  background: #f7fafc;
+  padding: 16px;
+  border-radius: 12px;
+  white-space: pre-wrap;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #e2e8f0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin-top: 8px;
+}
+
+#btnCerrarModal {
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+}
+
+/* Estados y mensajes */
+.status-message {
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.validation-error {
+  color: #e53e3e;
+  background: #fed7d7;
+  border: 1px solid #feb2b2;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.pdf-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 16px;
+  background: #edf2f7;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pdf-link:active {
+  background: #e2e8f0;
+  transform: translateY(1px);
+}
+
+/* Toggle de tema optimizado para móvil */
+.theme-toggle-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  min-height: 44px;
+  touch-action: manipulation;
+}
+
+.theme-toggle:active {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(1px);
+}
+
+.theme-icon {
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
 }
 
 /* Utilidades */
@@ -173,88 +500,379 @@ select:focus {
   display: none !important;
 }
 
-/* Modal */
+/* Variables CSS para modo oscuro */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7fafc;
+  --bg-tertiary: #edf2f7;
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  --border-color: #e2e8f0;
+  --border-color-light: #cbd5e0;
+  --border-color-focus: #667eea;
+  --shadow-light: rgba(0, 0, 0, 0.04);
+  --shadow-medium: rgba(0, 0, 0, 0.12);
+  --input-bg: #ffffff;
+  --modal-bg: #ffffff;
+  --modal-overlay: rgba(0, 0, 0, 0.7);
+  --success-bg: #c6f6d5;
+  --success-text: #22543d;
+  --success-border: #9ae6b4;
+  --warning-bg: #feebc8;
+  --warning-text: #c05621;
+  --warning-border: #f6ad55;
+  --error-bg: #fed7d7;
+  --error-text: #c53030;
+  --error-border: #feb2b2;
+  --tab-nav-bg: #f7fafc;
+  --tab-inactive-bg: transparent;
+  --tab-inactive-hover: #edf2f7;
+  --attachment-border: #cbd5e0;
+  --file-input-bg: #edf2f7;
+  --file-input-hover: #e2e8f0;
+  --pdf-link-bg: #edf2f7;
+  --pdf-link-hover: #e2e8f0;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a202c;
+  --bg-secondary: #2d3748;
+  --bg-tertiary: #4a5568;
+  --text-primary: #f7fafc;
+  --text-secondary: #e2e8f0;
+  --text-muted: #a0aec0;
+  --border-color: #4a5568;
+  --border-color-light: #2d3748;
+  --border-color-focus: #667eea;
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-medium: rgba(0, 0, 0, 0.4);
+  --input-bg: #2d3748;
+  --modal-bg: #1a202c;
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+  --success-bg: #22543d;
+  --success-text: #c6f6d5;
+  --success-border: #38a169;
+  --warning-bg: #c05621;
+  --warning-text: #feebc8;
+  --warning-border: #ed8936;
+  --error-bg: #c53030;
+  --error-text: #fed7d7;
+  --error-border: #e53e3e;
+  --tab-nav-bg: #2d3748;
+  --tab-inactive-bg: transparent;
+  --tab-inactive-hover: #4a5568;
+  --attachment-border: #4a5568;
+  --file-input-bg: #4a5568;
+  --file-input-hover: #718096;
+  --pdf-link-bg: #2d3748;
+  --pdf-link-hover: #4a5568;
+}
+
+/* Aplicar variables CSS */
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+}
+
+.pantalla {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: 0 8px 32px var(--shadow-medium);
+}
+
+.header-section h2 {
+  color: var(--text-primary);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+}
+
+.tab-nav {
+  background: var(--tab-nav-bg);
+}
+
+.tab-link {
+  color: var(--text-secondary);
+  background: var(--tab-inactive-bg);
+}
+
+.tab-link:active {
+  background: var(--tab-inactive-hover);
+  color: var(--text-primary);
+}
+
+.tab-content-wrapper {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.field-group label {
+  color: var(--text-primary);
+}
+
+input[type="text"],
+input[type="email"],
+textarea,
+select {
+  background: var(--input-bg);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--border-color-focus);
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-medico {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.form-medico label {
+  color: var(--text-secondary);
+}
+
+.form-medico input[type="text"],
+.form-medico textarea,
+.form-medico select {
+  background: var(--input-bg);
+}
+
+.common-fields {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.checkbox-group label {
+  color: var(--text-primary);
+}
+
+.attachment-section {
+  background: var(--bg-primary);
+  border: 2px dashed var(--attachment-border);
+}
+
+.attachment-section label {
+  color: var(--text-secondary);
+}
+
+input[type="file"] {
+  background: var(--file-input-bg);
+  color: var(--text-primary);
+}
+
+input[type="file"]:active {
+  background: var(--file-input-hover);
+}
+
 #modalPrevisualizacion {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  background: var(--modal-overlay);
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 600px;
-  width: 90%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  position: relative;
+  background: var(--modal-bg);
+  color: var(--text-primary);
 }
 
 .modal-content h3 {
-  margin-top: 0;
-  color: #007bff;
-  text-align: center;
-  margin-bottom: 20px;
+  color: var(--text-primary);
 }
 
-.modal-content p {
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-.modal-content strong {
-  color: #555;
+.preview-details strong {
+  color: var(--text-secondary);
 }
 
 .cuerpo-modal {
-  background-color: #f8f8f8;
-  padding: 15px;
-  border-radius: 6px;
-  white-space: pre-wrap;
-  max-height: 200px; /* Limita la altura del cuerpo en el modal */
-  overflow-y: auto; /* Añade scroll si el contenido es muy largo */
-  border: 1px solid #eee;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
-#btnCerrarModal {
-  background-color: #6c757d;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  display: block;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  transition: background-color 0.3s ease;
+.validation-error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: 1px solid var(--error-border);
 }
 
-#btnCerrarModal:hover {
-  background-color: #5a6268;
+.pdf-link {
+  background: var(--pdf-link-bg);
+  color: var(--border-color-focus);
 }
 
-#estadoPDF {
-  margin-top: 10px;
-  font-weight: bold;
+.pdf-link:active {
+  background: var(--pdf-link-hover);
 }
 
-#enlaceVerPDF {
-  display: inline-block;
-  margin-top: 10px;
-  color: #007bff;
-  text-decoration: none;
-  font-weight: bold;
+[data-theme="light"] .theme-toggle {
+  background: #edf2f7;
+  border-color: #e2e8f0;
+  color: #2d3748;
 }
 
-#enlaceVerPDF:hover {
-  text-decoration: underline;
+[data-theme="dark"] .theme-toggle {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .theme-toggle:active {
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Optimizaciones específicas para dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-success:hover,
+  .theme-toggle:hover,
+  .tab-link:hover {
+    transform: none;
+  }
+}
+
+/* Mejoras para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  body {
+    padding: 8px;
+  }
+
+  .pantalla {
+    padding: 16px 12px;
+  }
+
+  .header-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .tab-nav {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .tab-link {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+    min-height: 44px;
+  }
+
+  .tab-content-wrapper,
+  .common-fields {
+    padding: 16px;
+  }
+
+  .form-medico {
+    padding: 12px;
+  }
+
+  .modal-content {
+    padding: 20px 16px;
+  }
+
+  .theme-toggle {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* Mejoras para tablets y móviles en landscape */
+@media (min-width: 640px) and (max-width: 1024px) {
+  .pantalla {
+    max-width: 700px;
+    padding: 32px 28px;
+  }
+
+  .header-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+  }
+
+  .tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .tab-link {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .action-buttons button {
+    flex: 1;
+  }
+}
+
+/* Accesibilidad mejorada para móvil */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Alto contraste para mejor legibilidad en móvil */
+@media (prefers-contrast: high) {
+  .pantalla {
+    border: 3px solid var(--text-primary);
+  }
+
+  .tab-content-wrapper,
+  .common-fields {
+    border: 2px solid var(--text-secondary);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select {
+    border-width: 3px;
+  }
+}
+
+/* Optimización para iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  input[type="text"],
+  input[type="email"],
+  textarea,
+  select,
+  input[type="file"] {
+    -webkit-appearance: none;
+    border-radius: 12px;
+  }
+}
+
+/* **NUEVA REGLA PARA MODO CLARO** */
+[data-theme="light"] .theme-toggle {
+  background: #edf2f7;
+  border: 2px solid #e2e8f0;
+  color: #2d3748;
 }
