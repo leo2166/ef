@@ -1,0 +1,303 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f9fc;
+    margin: 0;
+    padding: 0;
+    color: #222;
+}
+
+.pantalla {
+    max-width: 480px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 32px 24px;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 16px auto;
+    width: 120px;
+    height: 120px;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #2176ff;
+    margin-bottom: 8px;
+}
+
+.subtitulo, .subtitulo-envio {
+    text-align: center;
+    color: #222;
+    margin-bottom: 18px;
+    font-size: 1.1em;
+}
+
+.beneficios {
+    color: #222;
+}
+
+.beneficios ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+}
+
+.beneficios li {
+    margin-bottom: 10px;
+    font-size: 1.08em;
+    padding-left: 24px;
+    position: relative;
+    color: #222;
+}
+
+.beneficios li:before {
+    content: "✔";
+    color: #2176ff;
+    position: absolute;
+    left: 0;
+}
+
+.btn-autorizar {
+    display: block;
+    width: 100%;
+    background: #2176ff;
+    color: #fff;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 32px;
+    padding: 16px 0;
+    margin: 32px 0 12px 0;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-autorizar:hover {
+    background: #1657b7;
+}
+
+.nota {
+    text-align: center;
+    color: #888;
+    font-size: 0.95em;
+}
+
+.header-envio {
+    background: #2176ff;
+    color: #fff;
+    border-radius: 12px 12px 0 0;
+    padding: 18px 16px 8px 16px;
+    margin: -32px -24px 24px -24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.header-envio-center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.icon-sobre {
+    font-size: 1.4em;
+    color: #fff;
+}
+
+.nombre-app {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.subtitulo-envio {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 0;
+    font-size: 1.1em;
+}
+
+.estado-autorizado {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    background: #fff;
+    color: #2176ff;
+    border-radius: 16px;
+    padding: 4px 12px;
+    font-size: 0.95em;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(33,118,255,0.08);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.destinatarios {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.btn-destinatario {
+    flex: 1;
+    background: #f2f6ff;
+    color: #2176ff;
+    border: 2px solid #2176ff;
+    border-radius: 12px;
+    padding: 12px 0;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-destinatario.selected {
+    background: #2176ff;
+    color: #fff;
+}
+
+input, textarea {
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cfd8dc;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+    border-color: #2176ff;
+}
+
+.btn-personalizar {
+    background: none;
+    color: #2176ff;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 8px;
+    text-align: left;
+}
+
+.dropzone {
+    border: 2px dashed #2176ff;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    background: #f2f6ff;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.formatos {
+    color: #888;
+    font-size: 0.95em;
+    margin-top: 8px;
+}
+
+.btn-enviar {
+    background: #2176ff;
+    color: #fff;
+    border: none;
+    border-radius: 32px;
+    padding: 16px 0;
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 18px;
+    transition: background 0.2s;
+}
+
+.btn-enviar:hover {
+    background: #1657b7;
+}
+
+/* ✅ MODO ZEUS: Botón "Continuar" original comentado */
+/*
+.btn-continuar {
+    display: block;
+    width: 100%;
+    background: #2176ff;
+    color: #fff;
+    font-size: 1.15em;
+    border: none;
+    border-radius: 32px;
+    padding: 14px 0;
+    margin-top: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+*/
+
+/* ✅ NUEVO: Estado inicial del botón "Continuar" — gris */
+.btn-continuar {
+    display: block;
+    width: 100%;
+    background: #cfd8dc; /* Color gris desde el inicio */
+    color: #888;
+    font-size: 1.15em;
+    border: none;
+    border-radius: 32px;
+    padding: 14px 0;
+    margin-top: 20px;
+    cursor: not-allowed;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+/* ✅ NUEVO: Activado tras autenticación */
+.btn-continuar.btn-activo {
+    background: #2176ff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-continuar.btn-activo:hover {
+    background: #1657b7;
+}
+
+/* Estilos para el pie de página */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f0f2f5;
+    color: #555;
+    font-size: 0.9em;
+    border-top: 1px solid #e0e0e0;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: #2176ff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

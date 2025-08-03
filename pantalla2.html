@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Composición de Correo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pantalla2.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="pantalla2.js" defer></script>
+</head>
+<body>
+  <div class="pantalla">
+    <h2>Composición y envío de correo</h2>
+
+    <!-- Pestañas de Navegación -->
+    <div class="tab-nav">
+      <button class="tab-link active" data-tab="reembolso">Reembolsos</button>
+      <button class="tab-link" data-tab="aval">Carta Aval</button>
+      <button class="tab-link" data-tab="cita">Solicitud de Cita / Examen</button>
+      <button class="tab-link" data-tab="otro">Otro</button>
+    </div>
+
+    <!-- Contenedor de Contenido de Pestañas -->
+    <div class="tab-content-wrapper">
+      <!-- Pestaña: Reembolso -->
+      <div id="reembolso" class="tab-content active">
+        <div class="field-group">
+          <label>Nombre y Apellido:</label><input type="text" id="nombreApellidoReembolso">
+          <label>Cédula:</label><input type="text" id="cedulaReembolso">
+          <label>Teléfono:</label><input type="text" id="telefonoReembolso">
+        </div>
+        <div class="field-group">
+          <label for="selectCuerpoReembolso">Cuerpo del mensaje:</label>
+          <select id="selectCuerpoReembolso">
+            <option value="predefinido">Mensaje Predefinido</option>
+            <option value="manual">Escribir Manualmente</option>
+          </select>
+          <textarea id="cuerpoReembolsoPredefinido" rows="5" readonly>Anexo se remite documentación en un solo archivo en formato PDF, para la gestión de reembolso por gasto médico.</textarea>
+          <textarea id="cuerpoReembolsoManual" rows="5" class="hidden" placeholder="Escribe aquí tu mensaje..."></textarea>
+        </div>
+      </div>
+
+      <!-- Pestaña: Carta Aval -->
+      <div id="aval" class="tab-content">
+        <div class="field-group">
+          <label>Nombre y Apellido:</label><input type="text" id="nombreApellidoAval">
+          <label>Cédula:</label><input type="text" id="cedulaAval">
+          <label>Teléfono:</label><input type="text" id="telefonoAval">
+        </div>
+        <div class="field-group">
+          <label for="selectCuerpoAval">Cuerpo del mensaje:</label>
+          <select id="selectCuerpoAval">
+            <option value="predefinido">Mensaje Predefinido</option>
+            <option value="manual">Escribir Manualmente</option>
+          </select>
+          <textarea id="cuerpoAvalPredefinido" rows="5" readonly>Anexo se remite documentación en un solo archivo en formato PDF, para el trámite de la carta aval.</textarea>
+          <textarea id="cuerpoAvalManual" rows="5" class="hidden" placeholder="Escribe aquí tu mensaje..."></textarea>
+        </div>
+      </div>
+
+      <!-- Pestaña: Solicitud de Cita / Examen -->
+      <div id="cita" class="tab-content">
+        <div class="field-group">
+          <label>Especialidad o tipo de examen:</label><input type="text" id="especialidadCita">
+        </div>
+        <div class="field-group">
+          <label>Cuerpo del correo (escribir manualmente):</label>
+          <textarea id="cuerpoCita" rows="10" placeholder="Incluye todos los datos necesarios..."></textarea>
+          <div class="form-medico">
+            <label><strong>Estado:</strong></label><input type="text" id="estadoCita">
+            <label><strong>Nombre del Titular:</strong></label><input type="text" id="nombreTitularCita">
+            <label><strong>Cédula:</strong></label><input type="text" id="cedulaTitularCita">
+            <label><strong>Dirección:</strong></label><input type="text" id="direccionCita">
+            <label><strong>Nombre del Beneficiario:</strong></label><input type="text" id="nombreBeneficiarioCita">
+            <label><strong>Cédula del Beneficiario:</strong></label><input type="text" id="cedulaBeneficiarioCita">
+            <label><strong>Tipo de Asegurado:</strong></label>
+            <select id="tipoAseguradoCita">
+              <option value="Jubilado 100% cubierto CC">Jubilado 100% cubierto CC</option>
+              <option value="Beneficiario">Beneficiario</option>
+              <option value="Sobreviviente">Sobreviviente</option>
+            </select>
+            <label><strong>Número de Contacto:</strong></label><input type="text" id="telefonoContactoCita">
+            <label><strong>Número de Contacto Adicional:</strong></label><input type="text" id="telefonoAdicionalCita">
+            <label><strong>Diagnóstico:</strong></label><input type="text" id="diagnosticoCita">
+            <label><strong>Requerimiento:</strong></label>
+            <select id="requerimientoCita">
+              <option value="Cita" selected>Cita</option>
+              <option value="Examen">Examen</option>
+            </select>
+            <label><strong>Primera Consulta (si/no):</strong></label>
+            <select id="primeraConsultaCita">
+              <option value="No" selected>No</option>
+              <option value="Si">Sí</option>
+            </select>
+            <label><strong>Proveedor de servicios de Salud:</strong></label><input type="text" id="proveedorCita">
+            <label><strong>Observación:</strong></label><textarea id="observacionCita"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pestaña: Otro -->
+      <div id="otro" class="tab-content">
+        <div class="field-group">
+          <label for="correoOtro">Dirección de correo:</label>
+          <input type="email" id="correoOtro" placeholder="ejemplo@dominio.com">
+          <p id="validacionCorreoOtro" class="hidden" style="color: red;">Correo no válido</p>
+        </div>
+        <div class="field-group">
+          <label for="asuntoOtro">Asunto del correo:</label>
+          <input type="text" id="asuntoOtro" placeholder="Escribe el asunto aquí...">
+        </div>
+        <div class="field-group">
+          <label for="cuerpoOtro">Cuerpo del mensaje:</label>
+          <textarea id="cuerpoOtro" rows="5"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Campos Comunes (fuera de las pestañas) -->
+    <div class="field-group">
+      <input type="checkbox" id="activarCC">
+      <label for="activarCC">Añadir CC (opcional)</label>
+      <div id="ccField" class="hidden">
+        <input type="email" id="cc" placeholder="Correo en copia">
+      </div>
+    </div>
+
+    <!-- Adjuntos -->
+    <div class="field-group">
+      <label for="imagenes">Selecciona imágenes JPG a adjuntar:</label>
+      <input type="file" id="imagenes" multiple accept="image/jpeg,image/jpg">
+      <div id="resultadoPDF"></div>
+      <button id="btnGenerarPDF">Generar PDF</button>
+      <p id="estadoPDF" style="color: green;"></p>
+      <a href="#" id="enlaceVerPDF" class="hidden" target="_blank">Ver PDF generado</a>
+    </div>
+
+    <!-- Previsualización -->
+    <div id="modalPrevisualizacion" class="hidden">
+      <div class="modal-content">
+        <h3>Previsualización del Correo</h3>
+        <p><strong>Para:</strong> <span id="previewPara"></span></p>
+        <p><strong>CC:</strong> <span id="previewCC"></span></p>
+        <p><strong>Asunto:</strong> <span id="previewAsunto"></span></p>
+        <p><strong>Adjunto:</strong> <span id="previewAdjunto"></span></p>
+        <p><strong>Cuerpo:</strong></p>
+        <div class="cuerpo-modal"><span id="previewCuerpo"></span></div>
+        <button id="btnCerrarModal">Cerrar</button>
+      </div>
+    </div>
+
+    <button id="btnPrevisualizar">Previsualizar Correo</button>
+    <button id="btnEnviar" disabled>Enviar</button>
+    <div id="mensaje"></div>
+  </div>
+</body>
+</html>

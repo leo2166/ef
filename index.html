@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Envío Fácil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <!-- Etiqueta de autenticación eliminada de la parte superior -->
+  <!-- <p id="estado-autenticacion"></p> -->
+  <p id="token-mostrado"></p>
+
+  <div id="pantalla-bienvenida" class="pantalla">
+    <img src="images/ef.png" alt="Logo Envío Fácil" class="logo">
+    <h1>Envío Fácil</h1>
+    <p class="subtitulo">Simplificando el envío de correos y conversión de documentos</p>
+
+    <div class="beneficios">
+      <ul>
+        <li>Enviar correos electrónicos de forma sencilla</li>
+        <li>Convertir múltiples imágenes a un solo PDF</li>
+        <li>Interfaz diseñada para facilidad de uso</li>
+      </ul>
+    </div>
+
+    <div id="g_id_onload"
+         data-client_id="153822552005-9rgnskk4tvfoaakr4hcnlnssts0scq0r.apps.googleusercontent.com"
+         data-context="use"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+
+    <!-- clase btn-autorizar comentada para eliminar fondo azul superpuesto -->
+    <!-- <div class="g_id_signin btn-autorizar"
+         data-type="standard"
+         data-size="large"
+         data-theme="filled_blue"
+         data-text="authorize"
+         data-shape="pill"
+         data-logo_alignment="left">
+    </div> -->
+
+    <!-- versión limpia sin clase btn-autorizar -->
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="filled_blue"
+         data-text="authorize"
+         data-shape="pill"
+         data-logo_alignment="left">
+    </div>
+
+    <button id="signout_button" style="display: none;">Cerrar Sesión</button>
+
+    <p class="nota">Al hacer clic en "Acceder con Google", se conectará con tu cuenta de Gmail para permitir el envío de correos.</p>
+    
+    <!-- ✅ Etiqueta de autenticado ahora aparece aquí -->
+    <div id="estado-autenticacion" style="margin-top: 16px; font-weight: bold;"></div>
+
+    <!-- 🔧 Línea comentada: mensaje redundante "Autenticado" -->
+    <!-- <div id="status">No autenticado</div> -->
+
+    <!-- Botón para pasar a la pantalla de envío (inicialmente deshabilitado) -->
+    <button id="btn-continuar" class="btn-continuar">Continuar</button>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Envío Fácil. Todos los derechos reservados.</p>
+    <p><a href="https://sites.google.com/view/enviofacil-polticas/politica-de-privacidad" target="_blank">Política de Privacidad</a> | <a href="about.html" id="link-acerca-de">Acerca de</a></p>
+  </footer>
+
+  <div id="pantalla-envio" class="pantalla" style="display:none;">
+    <h2>Formulario de Envío</h2>
+    <form id="form-envio">
+      <label for="email">Correo destinatario:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="imagenes">Seleccionar imágenes:</label>
+      <input type="file" id="imagenes" name="imagenes" multiple accept="image/*">
+
+      <button type="submit" class="btn-enviar">Convertir y Enviar</button>
+    </form>
+    <div id="resultado"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

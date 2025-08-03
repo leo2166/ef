@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Prueba de autenticación Gmail API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    pre {
+      background: #eee;
+      padding: 1em;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔐 Autenticación con Google Identity Services</h1>
+
+  <!-- Configuración GIS -->
+  <div id="g_id_onload"
+       data-client_id="153822552005-9rgnskk4tvfoaakr4hcnlnssts0scq0r.apps.googleusercontent.com"
+       data-context="use"
+       data-ux_mode="popup"
+       data-callback="handleCredentialResponse"
+       data-auto_prompt="false">
+  </div>
+
+  <!-- Botón de inicio de sesión -->
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="sign_in_with"
+       data-shape="rectangular"
+       data-logo_alignment="left">
+  </div>
+
+  <h2>📄 Token recibido:</h2>
+  <pre id="token-output">Esperando autenticación...</pre>
+
+  <script>
+    function handleCredentialResponse(response) {
+      const tokenOutput = document.getElementById("token-output");
+      tokenOutput.textContent = JSON.stringify(response, null, 2);
+      console.log("ID Token recibido:", response.credential);
+
+      // Aquí podrías continuar con la lógica para llamar a Gmail API
+      // usando el token, validarlo en tu backend, etc.
+    }
+  </script>
+</body>
+</html>
