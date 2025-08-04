@@ -124,6 +124,8 @@ h2 {
   margin: 20px 0;
   display: flex;
   justify-content: center;
+  /* Se oculta por defecto para evitar el parpadeo de renderizado */
+  visibility: hidden;
 }
 
 /* Botones principales optimizados para táctil */

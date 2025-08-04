@@ -99,6 +99,11 @@ window.onload = () => {
         }
     );
 
+    // Pequeña pausa para asegurar que el script de Google termine de renderizar
+    setTimeout(() => {
+        googleSignInDiv.style.visibility = 'visible';
+    }, 250); // 250ms de espera
+
     // 3. Lógica del botón Continuar
     btnContinuar.addEventListener("click", () => {
         if (estaAutenticado) {
