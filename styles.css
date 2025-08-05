@@ -119,13 +119,39 @@ h2 {
   margin-bottom: 0;
 }
 
-/* Botón de Google optimizado para móvil */
+/* SOLUCIÓN SIMPLE: Botón de Google con dimensiones fijas */
 .g_id_signin {
   margin: 20px 0;
   display: flex;
   justify-content: center;
-  /* Se oculta por defecto para evitar el parpadeo de renderizado */
-  visibility: hidden;
+
+  /* --- DIMENSIONES FIJAS PARA PREVENIR LAYOUT SHIFT --- */
+  min-height: 44px; /* Altura exacta del botón Google "large" */
+  max-height: 44px; /* Evitar que se estire más */
+  min-width: 240px; /* Ancho mínimo del botón Google */
+  width: 100%; /* Usar todo el ancho disponible */
+  max-width: 400px; /* Pero no más de 400px */
+
+  /* Centrar el contenido */
+  align-items: center;
+
+  /* Evitar que el contenido se desborde */
+  overflow: hidden;
+
+  /* Transición suave para cuando aparezca el botón */
+  transition: opacity 0.3s ease;
+}
+
+/* Estado inicial: invisible pero ocupando espacio */
+.g_id_signin:empty {
+  opacity: 0;
+  /* Mantener las dimensiones incluso cuando está vacío */
+  min-height: 44px;
+}
+
+/* Cuando el botón se renderiza, hacerlo visible */
+.g_id_signin:not(:empty) {
+  opacity: 1;
 }
 
 /* Botones principales optimizados para táctil */
@@ -483,16 +509,10 @@ footer {
   background: rgba(26, 32, 44, 0.95);
 }
 
-[data-theme="light"] .theme-toggle {
-  background: #edf2f7;
-  border-color: #e2e8f0;
-  color: #2d3748;
-}
-
 [data-theme="dark"] .theme-toggle {
   background: rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
 }
 
 [data-theme="dark"] .theme-toggle:active {
@@ -544,6 +564,12 @@ footer {
   .theme-toggle {
     padding: 10px 16px;
     font-size: 0.95rem;
+  }
+
+  /* Ajustar botón Google en pantallas pequeñas */
+  .g_id_signin {
+    min-width: 200px;
+    max-width: 300px;
   }
 }
 
@@ -600,11 +626,4 @@ footer {
     -webkit-appearance: none;
     border-radius: 12px;
   }
-}
-
-/* **NUEVA REGLA PARA MODO CLARO** */
-[data-theme="light"] .theme-toggle {
-  background: #edf2f7;
-  border: 2px solid #e2e8f0;
-  color: #2d3748;
 }

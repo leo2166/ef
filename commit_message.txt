@@ -1,0 +1,7 @@
+feat: Implementación completa del flujo de envío y mejoras en la UI
+
+Este commit incluye las siguientes mejoras:
+
+*   **Flujo de Envío Completo:** Se ha implementado la lógica completa para la composición y el envío de correos, incluyendo la selección de destinatarios por pestañas, campos dinámicos, adjuntos de PDF generados desde JPG y previsualización.
+*   **Mejoras en la Interfaz:** Se han realizado ajustes en los estilos de `pantalla2.css` y `styles.css` para mejorar la experiencia de usuario.
+*   **Actualización del Service Worker:** Se ha modificado `sw.js` para reflejar los últimos cambios en la aplicación.

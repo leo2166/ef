@@ -1,7 +1,7 @@
 // Service Worker para Envío Fácil PWA
-// Versión: 1.0.0
+// Versión: 1.1.0
 
-const CACHE_NAME = "envio-facil-v1.0.0"
+const CACHE_NAME = "envio-facil-v1.1.0"
 const OFFLINE_URL = "/offline.html"
 
 // Archivos esenciales para cachear
