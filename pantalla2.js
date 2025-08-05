@@ -32,27 +32,32 @@
   const CLIENT_ID = "153822552005-9rgnskk4tvfoaakr4hcnlnssts0scq0r.apps.googleusercontent.com"
   const SCOPES = "https://www.googleapis.com/auth/gmail.send"
 
+  // MODIFICADO: Lógica de refresco de token movida al callback
   tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
     callback: (tokenResponse) => {
       if (tokenResponse && tokenResponse.access_token) {
+        console.log("✅ Token de acceso nuevo/refrescado obtenido.")
         localStorage.setItem("gmail_access_token", tokenResponse.access_token)
-        // Si el envío estaba pendiente, reintentar
+        
+        // Si el envío estaba pendiente por un token expirado, se reintenta ahora.
         if (window.pendingSend) {
+          console.log("🔄 Reintentando envío con el nuevo token...")
           enviarCorreo(
             window.pendingSend.para,
             window.pendingSend.cc,
             window.pendingSend.asunto,
             window.pendingSend.cuerpo,
-            tokenResponse.access_token,
+            tokenResponse.access_token, // Usar el token fresco
             window.pendingSend.pdfBlob,
             window.pendingSend.nombreArchivoPDF,
           )
           window.pendingSend = null // Limpiar la solicitud pendiente
         }
       } else {
-        hideLoadingModal()
+        // Si el refresco falla, es un error serio.
+        resetSendButton()
         alert("No se pudo refrescar la autorización. Por favor, vuelve a iniciar sesión.")
         window.location.href = "index.html"
       }
@@ -409,7 +414,7 @@
   }
 
   // Manejar envío de correo
-  async function handleEmailSend() {
+  async function handleEmailSend(event) {
     // PREVENIR MÚLTIPLES CLICS
     event.preventDefault()
     event.stopImmediatePropagation()
@@ -458,8 +463,9 @@
     return false
   }
 
+  // MODIFICADO: Lógica de envío con reintento automático
   async function enviarCorreo(para, cc, asunto, cuerpo, token, attachmentBlob, attachmentName) {
-    console.log("📤 Enviando correo a:", para)
+    console.log("📤 Preparando para enviar correo a:", para)
 
     const message = [
       `To: ${para}`,
@@ -493,17 +499,20 @@
 
         if (response.ok) {
           console.log("✅ Correo enviado exitosamente")
-          // NO RESETEAR isEmailSending aquí, se resetea en returnToHome
           showSuccessModal()
         } else {
           const errorData = await response.json()
           console.error("❌ Error al enviar el correo:", errorData)
-          resetSendButton()
 
+          // ¡NUEVA LÓGICA DE REINTENTO!
           if (response.status === 401) {
-            alert("Tu sesión ha expirado. Por favor, re-autoriza la aplicación.")
-            window.location.href = "index.html"
+            console.log("🔑 Token de acceso expirado. Intentando refrescar automáticamente...")
+            // Guardar los datos del correo para el reintento
+            window.pendingSend = { para, cc, asunto, cuerpo, pdfBlob: attachmentBlob, nombreArchivoPDF: attachmentName }
+            // Solicitar un nuevo token. El callback se encargará del reintento.
+            tokenClient.requestAccessToken({ prompt: '' }) // prompt vacío para un intento silencioso
           } else {
+            resetSendButton()
             alert("Error al enviar el correo: " + (errorData.error ? errorData.error.message : "Desconocido"))
           }
         }
@@ -528,43 +537,18 @@
           `--foo_bar_baz--`,
         )
         const rawMessage = message.join("\n")
-        const encodedMessage = btoa(rawMessage).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "")
+        const encodedMessage = btoa(unescape(encodeURIComponent(rawMessage))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "")
         await realizarEnvioFinal(encodedMessage)
       }
       reader.readAsDataURL(attachmentBlob)
     } else {
       message.push(`--foo_bar_baz--`)
       const rawMessage = message.join("\n")
-      const encodedMessage = btoa(rawMessage).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "")
+      const encodedMessage = btoa(unescape(encodeURIComponent(rawMessage))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "")
       await realizarEnvioFinal(encodedMessage)
     }
   }
-
-  // COMENTADO: Modal de carga rojo
-  /*
-  function showLoadingModal() {
-    // Eliminar cualquier modal existente primero
-    const existingModal = document.getElementById("envio-loading-modal")
-    if (existingModal) {
-      existingModal.remove()
-    }
-
-    const modal = document.createElement("div")
-    modal.id = "envio-loading-modal"
-    modal.className = "envio-modal"
-    modal.innerHTML = `
-    <div class="envio-modal-content">
-      <div class="loading-animation">⏳</div>
-      <h3>Envío de correo en curso</h3>
-      <p>Espere<span class="loading-dots"></span></p>
-    </div>
-  `
-
-    document.body.appendChild(modal)
-    document.body.style.overflow = "hidden"
-  }
-  */
-
+  
   function showSuccessModal() {
     console.log("🎉 Mostrando modal de éxito...")
 
@@ -586,15 +570,6 @@
     console.log("✅ Modal de éxito mostrado")
   }
 
-  function hideLoadingModal() {
-    const modal = document.getElementById("envio-loading-modal")
-    if (modal) {
-      modal.remove()
-      document.body.style.overflow = ""
-      console.log("✅ Modal de carga ocultado")
-    }
-  }
-
   // Nueva función para resetear el botón
   function resetSendButton() {
     isEmailSending = false
@@ -612,10 +587,7 @@
     isEmailSending = false
 
     // Limpiar cualquier modal existente
-    const loadingModal = document.getElementById("envio-loading-modal")
     const successModal = document.getElementById("envio-success-modal")
-
-    if (loadingModal) loadingModal.remove()
     if (successModal) successModal.remove()
 
     document.body.style.overflow = ""

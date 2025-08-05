@@ -121,7 +121,7 @@ h2 {
 
 /* SOLUCIÓN SIMPLE: Botón de Google con dimensiones fijas */
 .g_id_signin {
-  margin: 20px 0;
+  margin: 20px auto; /* Corregido para centrar el contenedor */
   display: flex;
   justify-content: center;
 
@@ -352,8 +352,8 @@ footer a:active {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(45, 55, 72, 0.5); /* Cambiado a gris oscuro semitransparente */
+  border: 2px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
   border-radius: 50px;
   padding: 12px 20px;
   cursor: pointer;
