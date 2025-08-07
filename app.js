@@ -43,7 +43,7 @@ function handleCredentialResponse(response) {
       document.getElementById('signout_button').style.display = 'block';
       document.querySelector('.g_id_signin').style.display = 'none';
       document.getElementById('btn-continuar').disabled = false;
-      document.getElementById('btn-continuar').classList.add('habilitado');
+      document.getElementById('btn-continuar').classList.add('btn-activo');
     },
     error_callback: (error) => {
         console.error("DEBUG: ERROR en initTokenClient (error_callback):", JSON.stringify(error, null, 2));
@@ -66,12 +66,12 @@ function checkAuth() {
     document.getElementById('signout_button').style.display = 'block';
     document.querySelector('.g_id_signin').style.display = 'none';
     document.getElementById('btn-continuar').disabled = false;
-    document.getElementById('btn-continuar').classList.add('habilitado');
+    document.getElementById('btn-continuar').classList.add('btn-activo');
   } else {
     console.log("DEBUG: No se encontró un token en localStorage.");
     document.getElementById('estado-autenticacion').innerText = 'Esperando autenticación...';
     document.getElementById('btn-continuar').disabled = true;
-    document.getElementById('btn-continuar').classList.remove('habilitado');
+    document.getElementById('btn-continuar').classList.remove('btn-activo');
   }
 }
 
@@ -94,7 +94,7 @@ function signOut() {
   document.getElementById('signout_button').style.display = 'none';
   document.querySelector('.g_id_signin').style.display = 'block';
   document.getElementById('btn-continuar').disabled = true;
-  document.getElementById('btn-continuar').classList.remove('habilitado');
+  document.getElementById('btn-continuar').classList.remove('btn-activo');
 }
 
 
