@@ -1,4 +1,4 @@
-// --- INICIO: app.js con depuración ---
+// --- INICIO: app.js corregido ---
 
 console.log("DEBUG: app.js cargado y ejecutándose.");
 
@@ -42,8 +42,10 @@ function handleCredentialResponse(response) {
       estadoAuthEl.className = 'auth-status auth-success';
       document.getElementById('signout_button').style.display = 'block';
       document.querySelector('.g_id_signin').style.display = 'none';
+      
       const btnContinuar = document.getElementById('btn-continuar');
       btnContinuar.disabled = false;
+      btnContinuar.removeAttribute('disabled'); // 🔹 asegura quitar atributo
       btnContinuar.classList.add('btn-activo');
     },
     error_callback: (error) => {
@@ -66,17 +68,18 @@ function checkAuth() {
   if (accessToken) {
     console.log("DEBUG: Se encontró un token en localStorage. Activando botón continuar.");
     estadoAuthEl.innerText = 'Ya estás autenticado. ¡Listo para continuar!';
-    estadoAuthEl.className = 'auth-status auth-success'; // <-- Clase de éxito
+    estadoAuthEl.className = 'auth-status auth-success';
     document.getElementById('signout_button').style.display = 'block';
     document.querySelector('.g_id_signin').style.display = 'none';
     
     btnContinuar.disabled = false;
+    btnContinuar.removeAttribute('disabled'); // 🔹 asegura quitar atributo
     btnContinuar.classList.add('btn-activo');
 
   } else {
     console.log("DEBUG: No se encontró un token en localStorage. Botón continuar desactivado.");
     estadoAuthEl.innerText = 'Esperando autenticación...';
-    estadoAuthEl.className = 'auth-status auth-neutral'; // <-- Clase neutral
+    estadoAuthEl.className = 'auth-status auth-neutral';
     
     btnContinuar.disabled = true;
     btnContinuar.classList.remove('btn-activo');
@@ -103,12 +106,11 @@ function signOut() {
   estadoAuthEl.className = 'auth-status auth-neutral';
   document.getElementById('signout_button').style.display = 'none';
   document.querySelector('.g_id_signin').style.display = 'block';
-  document.getElementById('btn-continuar').disabled = true;
-  document.getElementById('btn-continuar').classList.remove('btn-activo');
+  const btnContinuar = document.getElementById('btn-continuar');
+  btnContinuar.disabled = true;
+  btnContinuar.classList.remove('btn-activo');
 }
 
-
-// Se ejecuta cuando toda la página (imágenes, etc.) ha cargado.
 window.onload = function () {
   console.log("DEBUG: window.onload FUE LLAMADO.");
   
@@ -142,4 +144,4 @@ window.onload = function () {
 };
 
 console.log("DEBUG: Fin del script app.js.");
-// --- FIN: app.js con depuración ---
+// --- FIN: app.js corregido ---
