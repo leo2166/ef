@@ -159,9 +159,9 @@ h2 {
   display: block;
   width: 100%;
   /* ESTILO BASE SIEMPRE AZUL */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0a32e2 0%, #1808f8 100%);
   color: #ffffff;
-  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 16px rgba(13, 53, 235, 0.3);
   font-size: 1.125rem;
   border: none;
   border-radius: 16px;
@@ -175,16 +175,17 @@ h2 {
   touch-action: manipulation;
 }
 
-/* El botón se ve "apagado" cuando está deshabilitado, pero no gris */
+/* El botón se ve "apagado" cuando está deshabilitado, con opacidad */
 .btn-continuar:disabled {
-  opacity: 0.5;
+  background: linear-gradient(135deg, #0a32e2 0%, #1808f8 100%);
+  opacity: 0.5; /* 50% desvanecido */
   cursor: not-allowed;
   box-shadow: none;
 }
 
 .btn-continuar:not(:disabled):active {
   transform: translateY(1px);
-  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 2px 8px rgba(7, 48, 228, 0.4);
 }
 
 #signout_button {

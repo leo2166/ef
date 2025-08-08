@@ -27,6 +27,7 @@
   const btnEnviar = document.getElementById("btnEnviar")
   const modalPrevisualizacion = document.getElementById("modalPrevisualizacion")
   const btnCerrarModal = document.getElementById("btnCerrarModal")
+  const modalCarga = document.getElementById("modalCarga") // <-- Añadido
 
   // --- ESTADO DE LA APLICACIÓN ---
   const CLIENT_ID = "153822552005-9rgnskk4tvfoaakr4hcnlnssts0scq0r.apps.googleusercontent.com"
@@ -426,6 +427,7 @@
 
     console.log("📧 Iniciando envío de correo...")
     isEmailSending = true
+    modalCarga.classList.remove("hidden") // <-- Mostrar modal de carga
 
     // DESHABILITAR BOTÓN INMEDIATAMENTE
     btnEnviar.disabled = true
@@ -499,10 +501,12 @@
 
         if (response.ok) {
           console.log("✅ Correo enviado exitosamente")
+          modalCarga.classList.add("hidden") // <-- Ocultar modal de carga
           showSuccessModal()
         } else {
           const errorData = await response.json()
           console.error("❌ Error al enviar el correo:", errorData)
+          modalCarga.classList.add("hidden") // <-- Ocultar modal de carga
 
           // ¡NUEVA LÓGICA DE REINTENTO!
           if (response.status === 401) {

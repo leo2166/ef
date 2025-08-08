@@ -350,7 +350,7 @@ input[type="file"]:active {
 }
 
 /* Modal optimizado para móvil */
-#modalPrevisualizacion {
+#modalPrevisualizacion, #modalCarga {
   position: fixed;
   top: 0;
   left: 0;
@@ -359,11 +359,10 @@ input[type="file"]:active {
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* Centrado verticalmente */
   z-index: 1000;
   backdrop-filter: blur(4px);
   padding: 20px 12px;
-  overflow-y: auto;
 }
 
 .modal-content {
@@ -376,7 +375,6 @@ input[type="file"]:active {
   overflow-y: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   position: relative;
-  margin-top: 20px;
 }
 
 .modal-content h3 {
@@ -417,6 +415,38 @@ input[type="file"]:active {
   display: block;
   width: 100%;
 }
+
+/* Estilos para el Modal de Carga */
+.modal-content-carga {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.spinner {
+  border: 6px solid #f3f3f3; /* Gris claro */
+  border-top: 6px solid #667eea; /* Azul */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.modal-content-carga p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #4a5568;
+  margin: 0;
+}
+
 
 /* Estados y mensajes */
 .status-message {
@@ -681,7 +711,7 @@ input[type="file"]:active {
   background: var(--file-input-hover);
 }
 
-#modalPrevisualizacion {
+#modalPrevisualizacion, #modalCarga {
   background: var(--modal-overlay);
 }
 
@@ -1013,6 +1043,12 @@ input[type="file"]:active {
   transform: translateY(0);
   background: rgba(255, 255, 255, 0.4);
 }
+
+/* Estilo específico para el modal de carga */
+.envio-modal-content.loading {
+    background: linear-gradient(135deg, #5a67d8 0%, #8860d0 100%);
+}
+
 
 /* Estado deshabilitado para botón de envío */
 .btn-success:disabled {

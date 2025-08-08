@@ -1,0 +1,12 @@
+
+
+
+Google no verificó esta app
+---La app "Envío Fácil" permite a los usuarios enviar correos
+ electrónicos personalizados de forma eficiente, especialmente diseñada 
+para trabajadores y jubilados que requieren un sistema simple y accesible.
+ El permiso `gmail.send` es fundamental para que la app pueda realizar 
+el envío en nombre del usuario, tras su autorización explícita mediante OAuth 2.0. 
+Este permiso garantiza una experiencia directa sin necesidad de copiar y pegar textos
+en Gmail. Usar un conjunto de permisos más limitado resultaría insuficiente, ya que impediría el envío
+automatizado desde la interfaz, afectando la funcionalidad principal de la aplicación
