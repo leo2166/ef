@@ -59,31 +59,46 @@ function handleCredentialResponse(response) {
   client.requestAccessToken();
 }
 
-function checkAuth() {
+async function checkAuth() {
   console.log("DEBUG: Ejecutando checkAuth() para verificar si ya existe un token.");
-  accessToken = localStorage.getItem('gmail_access_token');
   const btnContinuar = document.getElementById('btn-continuar');
   const estadoAuthEl = document.getElementById('estado-autenticacion');
-  
-  if (accessToken) {
-    console.log("DEBUG: Se encontró un token en localStorage. Activando botón continuar.");
-    estadoAuthEl.innerText = 'Ya estás autenticado. ¡Listo para continuar!';
-    estadoAuthEl.className = 'auth-status auth-success';
-    document.getElementById('signout_button').style.display = 'block';
-    document.querySelector('.g_id_signin').style.display = 'none';
-    
-    btnContinuar.disabled = false;
-    btnContinuar.removeAttribute('disabled'); // 🔹 asegura quitar atributo
-    btnContinuar.classList.add('btn-activo');
+  let token = localStorage.getItem('gmail_access_token');
 
-  } else {
-    console.log("DEBUG: No se encontró un token en localStorage. Botón continuar desactivado.");
-    estadoAuthEl.innerText = 'Esperando autenticación...';
-    estadoAuthEl.className = 'auth-status auth-neutral';
-    
-    btnContinuar.disabled = true;
-    btnContinuar.classList.remove('btn-activo');
+  if (token) {
+    console.log("DEBUG: Token encontrado en localStorage. Verificando validez con Google...");
+    try {
+      const response = await fetch(`https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${token}`);
+      if (response.ok) {
+        console.log("DEBUG: El token es válido. Activando la sesión.");
+        accessToken = token;
+        estadoAuthEl.innerText = 'Ya estás autenticado. ¡Listo para continuar!';
+        estadoAuthEl.className = 'auth-status auth-success';
+        document.getElementById('signout_button').style.display = 'block';
+        document.querySelector('.g_id_signin').style.display = 'none';
+        btnContinuar.disabled = false;
+        btnContinuar.removeAttribute('disabled');
+        btnContinuar.classList.add('btn-activo');
+        return; // Salir de la función, todo está OK.
+      } else {
+        console.log("DEBUG: El token es inválido o ha expirado. Limpiando...");
+        localStorage.removeItem('gmail_access_token');
+      }
+    } catch (error) {
+      console.error("DEBUG: Error de red al verificar el token. Asumiendo que no hay sesión.", error);
+      localStorage.removeItem('gmail_access_token');
+    }
   }
+
+  // Si no hay token o el token fue invalidado, se llega a este punto.
+  console.log("DEBUG: No hay un token válido. Configurando para nueva autenticación.");
+  accessToken = null;
+  estadoAuthEl.innerText = 'Esperando autenticación...';
+  estadoAuthEl.className = 'auth-status auth-neutral';
+  document.getElementById('signout_button').style.display = 'none';
+  document.querySelector('.g_id_signin').style.display = 'block';
+  btnContinuar.disabled = true;
+  btnContinuar.classList.remove('btn-activo');
 }
 
 function signOut() {
