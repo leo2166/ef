@@ -44,9 +44,7 @@ function handleCredentialResponse(response) {
       document.querySelector('.g_id_signin').style.display = 'none';
       
       const btnContinuar = document.getElementById('btn-continuar');
-      btnContinuar.disabled = false;
-      btnContinuar.removeAttribute('disabled'); // 🔹 asegura quitar atributo
-      btnContinuar.classList.add('btn-activo');
+      btnContinuar.disabled = false; // Habilitar
     },
     error_callback: (error) => {
         console.error("DEBUG: ERROR en initTokenClient (error_callback):", JSON.stringify(error, null, 2));
@@ -76,9 +74,7 @@ async function checkAuth() {
         estadoAuthEl.className = 'auth-status auth-success';
         document.getElementById('signout_button').style.display = 'block';
         document.querySelector('.g_id_signin').style.display = 'none';
-        btnContinuar.disabled = false;
-        btnContinuar.removeAttribute('disabled');
-        btnContinuar.classList.add('btn-activo');
+        btnContinuar.disabled = false; // Habilitar
         return; // Salir de la función, todo está OK.
       } else {
         console.log("DEBUG: El token es inválido o ha expirado. Limpiando...");
@@ -97,8 +93,7 @@ async function checkAuth() {
   estadoAuthEl.className = 'auth-status auth-neutral';
   document.getElementById('signout_button').style.display = 'none';
   document.querySelector('.g_id_signin').style.display = 'block';
-  btnContinuar.disabled = true;
-  btnContinuar.classList.remove('btn-activo');
+  btnContinuar.disabled = true; // Deshabilitar
 }
 
 function signOut() {
@@ -122,8 +117,7 @@ function signOut() {
   document.getElementById('signout_button').style.display = 'none';
   document.querySelector('.g_id_signin').style.display = 'block';
   const btnContinuar = document.getElementById('btn-continuar');
-  btnContinuar.disabled = true;
-  btnContinuar.classList.remove('btn-activo');
+  btnContinuar.disabled = true; // Deshabilitar
 }
 
 window.onload = function () {
