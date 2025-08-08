@@ -630,13 +630,15 @@
       btnPrevisualizar.disabled = false
     }
     console.log("✅ Pantalla2 inicializada correctamente")
+
+    // Seleccionar la pestaña inicial
+    switchTab("reembolso")
   }
 
-  switchTab("reembolso")
-
+  // Asegurarse de que el DOM esté completamente listo
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initPantalla2)
+    document.addEventListener("DOMContentLoaded", () => setTimeout(initPantalla2, 0))
   } else {
-    initPantalla2()
+    setTimeout(initPantalla2, 0)
   }
 })()
