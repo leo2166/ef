@@ -119,39 +119,13 @@ h2 {
   margin-bottom: 0;
 }
 
-/* SOLUCIÓN SIMPLE: Botón de Google con dimensiones fijas */
-.g_id_signin {
-  margin: 20px auto; /* Corregido para centrar el contenedor */
+.google-button-container {
   display: flex;
   justify-content: center;
-
-  /* --- DIMENSIONES FIJAS PARA PREVENIR LAYOUT SHIFT --- */
-  min-height: 44px; /* Altura exacta del botón Google "large" */
-  max-height: 44px; /* Evitar que se estire más */
-  min-width: 240px; /* Ancho mínimo del botón Google */
-  width: 100%; /* Usar todo el ancho disponible */
-  max-width: 400px; /* Pero no más de 400px */
-
-  /* Centrar el contenido */
   align-items: center;
-
-  /* Evitar que el contenido se desborde */
-  overflow: hidden;
-
-  /* Transición suave para cuando aparezca el botón */
-  transition: opacity 0.3s ease;
-}
-
-/* Estado inicial: invisible pero ocupando espacio */
-.g_id_signin:empty {
-  opacity: 0;
-  /* Mantener las dimensiones incluso cuando está vacío */
-  min-height: 44px;
-}
-
-/* Cuando el botón se renderiza, hacerlo visible */
-.g_id_signin:not(:empty) {
-  opacity: 1;
+  width: 100%;
+  min-height: 44px; /* Altura para prevenir el salto de layout */
+  margin: 20px 0;
 }
 
 /* Botones principales optimizados para táctil */
